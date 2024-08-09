@@ -31,7 +31,7 @@ public:
         }
         
         // Resize the vector to fit the compressed result
-        chars.resize(index);
+        
         return index;
     }
 };
