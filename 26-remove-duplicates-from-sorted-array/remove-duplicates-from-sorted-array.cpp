@@ -19,10 +19,10 @@ public:
         // Step 2: Initialize two pointers, i and j
         // i: Tracks the position of the last unique element
         // j: Scans through the array starting from the second element
-        int i = 0, j = 1;
+        int i = 0;
         
         // Step 3: Traverse the array with pointer j
-        for(; j < n; j++) {
+        for(int j = 1; j < n; j++) {
             // If a unique element is found (nums[j] != nums[i])
             if (nums[j] != nums[i]) {
                 // Move i to the next position and update with the unique element
