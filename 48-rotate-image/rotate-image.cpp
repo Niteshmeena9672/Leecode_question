@@ -1,33 +1,28 @@
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        // Get the size of the matrix (number of rows or columns since it's square)
-        int edgeLength = matrix.size();
+        int edgeLength = matrix.size(); // Get the size of the matrix (since it's square)
 
-        // Initialize two pointers for top and bottom rows
-        int top = 0;
-        int bottom = edgeLength - 1;
+        int top = 0; // Pointer to the top row
+        int bottom = edgeLength - 1; // Pointer to the bottom row
 
-        // First step: Flip the matrix upside down (top to bottom)
+        // Step 1: Flip the matrix upside down (swap top and bottom rows)
         while (top < bottom) {
-            // Swap elements of the 'top' and 'bottom' rows for each column
             for (int col = 0; col < edgeLength; col++) {
-                int temp = matrix[top][col];
-                matrix[top][col] = matrix[bottom][col];
-                matrix[bottom][col] = temp;
+                int temp = matrix[top][col]; // Temporarily store the top row element
+                matrix[top][col] = matrix[bottom][col]; // Assign bottom row element to top
+                matrix[bottom][col] = temp; // Assign stored top row element to bottom
             }
-            // Move 'top' down and 'bottom' up towards each other
-            top++;
-            bottom--;
+            top++; // Move the top pointer down
+            bottom--; // Move the bottom pointer up
         }
 
-        // Second step: Transpose the matrix (swap elements symmetrically across the diagonal)
+        // Step 2: Transpose the matrix (swap elements symmetrically along the diagonal)
         for (int row = 0; row < edgeLength; row++) {
             for (int col = row + 1; col < edgeLength; col++) {
-                // Swap matrix[row][col] with matrix[col][row] to transpose the matrix
-                int temp = matrix[row][col];
-                matrix[row][col] = matrix[col][row];
-                matrix[col][row] = temp;
+                int temp = matrix[row][col]; // Temporarily store the element at (row, col)
+                matrix[row][col] = matrix[col][row]; // Swap with the element at (col, row)
+                matrix[col][row] = temp; // Assign the stored element to (col, row)
             }
         }        
     }
