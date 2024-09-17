@@ -3,19 +3,23 @@ public:
     vector<string> uncommonFromSentences(string s1, string s2) {
         string temp ="";
         string s = s1 + " " + s2;
+        stringstream str(s);
         unordered_map<string,int> mpp;
-        for(auto val : s){
-            if(val==' '){
-                mpp[temp]++;
-                temp = "";
-            }
-            else{
-                temp+=val;
-            }
-        }
-        if(temp!=""){
+        // for(auto val : s){
+        //     if(val==' '){
+        //         mpp[temp]++;
+        //         temp = "";
+        //     }
+        //     else{
+        //         temp+=val;
+        //     }
+        // }
+        // if(temp!=""){
+        //     mpp[temp]++;
+        //     temp="";
+        // }
+        while(str>>temp){
             mpp[temp]++;
-            temp="";
         }
         vector<string>ans;
         for(auto val : mpp){
