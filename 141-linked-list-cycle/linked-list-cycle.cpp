@@ -13,7 +13,7 @@ public:
         // Iterate until fast and slow meet
         do{
             // Check if fast has reached the end or its next node
-            if (fast->next == NULL || fast->next->next == NULL) {
+            if (  fast == NULL || fast->next == NULL) {
                 return false; // No cycle if fast reaches the end
             }
 
