@@ -1,32 +1,42 @@
 class Solution {
 public:
-    int longestConsecutive(vector<int>& nums) {
-        unordered_set<int> uniqueNums;  // Set to store unique numbers from the input
-        int maxConsecutiveLength = 0;   // Variable to track the longest consecutive sequence
-
-        // Insert all elements into the unordered set to eliminate duplicates
-        for(auto num : nums){
-            uniqueNums.insert(num);
+    int longestConsecutiveSubsequence(vector<int>& nums) {
+        unordered_map<int, int> mpp;
+        int n = nums.size();
+        
+        // Mark all elements in the map as not visited
+        for (int i = 0; i < n; i++) {
+            mpp[nums[i]] = 0;
         }
+        
+        int longest_sequence = 0;
 
-        // Iterate through the set to find the longest consecutive sequence
-        for(auto num : uniqueNums){
-            // Check if the current number is the start of a sequence
-            if(uniqueNums.find(num - 1) == uniqueNums.end()){
-                int currentConsecutiveLength = 1;  // Length of the current consecutive sequence
-                int currentNum = num;  // Variable to track the current number in the sequence
-
-                // Check for the next numbers in the sequence
-                while(uniqueNums.find(currentNum + 1) != uniqueNums.end()){
-                    currentConsecutiveLength++;  // Increase the sequence length
-                    currentNum++;  // Move to the next number in the sequence
+        for (int i = 0; i < n; i++) {
+            if (mpp[nums[i]] != 1) {
+                int curr_sequence = 0;
+                int starting_number = nums[i];
+                
+                // Find the smallest starting number of the sequence
+                while (mpp.find(starting_number - 1) != mpp.end()) {
+                    starting_number -= 1;
                 }
-
-                // Update the maximum consecutive sequence length if the current one is longer
-                maxConsecutiveLength = max(maxConsecutiveLength, currentConsecutiveLength);
+                
+                // Count the length of the sequence starting from the smallest number
+                while (mpp.find(starting_number) != mpp.end()) {
+                    curr_sequence += 1;
+                    mpp[starting_number] = 1; // Mark as visited
+                    starting_number += 1;
+                }
+                
+                longest_sequence = max(curr_sequence, longest_sequence);
             }
         }
+        
+        return longest_sequence;
+    }
 
-        return maxConsecutiveLength;  // Return the length of the longest consecutive sequence
+    int longestConsecutive(vector<int>& nums) {
+        if (nums.empty()) return 0;
+        return longestConsecutiveSubsequence(nums);
     }
 };
