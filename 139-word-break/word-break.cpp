@@ -38,7 +38,7 @@ public:
             return true;  // Basically yha pe we are starting from 0 >=n so first character match will start, this comes in picture when we have explored all character and now nothing is left
         }
         if(memo[idx]!=-1) return memo[idx];
-        for (int l = 1; l <= n - idx; l++) {  // Check for every substring from current index.
+        for (int l = 1; l <= n; l++) {  // Check for every substring from current index.
             string temp = s.substr(idx, l);  // Create substring starting from idx with length l.
 
             // If the substring is in the set and we can solve the remaining part recursively.
