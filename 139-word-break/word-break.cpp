@@ -35,7 +35,7 @@ public:
     bool solve(int idx, string &s,vector<int>&memo) {
         int n = s.length();
         if (idx >= n) {
-            return true;  // Base case: If the index reaches the end of the string, return true.
+            return true;  // Basically yha pe we are starting from 0 >=n so first character match will start, this comes in picture when we have explored all character and now nothing is left
         }
         if(memo[idx]!=-1) return memo[idx];
         for (int l = 1; l <= n - idx; l++) {  // Check for every substring from current index.
